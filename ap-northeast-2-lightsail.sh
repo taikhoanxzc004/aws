@@ -1,3 +1,4 @@
+#!/bin/bash
 ﻿aws lightsail create-instances --instance-names ap-northeast-2-1 --availability-zone ap-northeast-2a --blueprint-id ubuntu_22_04 --bundle-id small_3_0 --user-data file:///root/AWS-AMD-internetincome.sh --region ap-northeast-2
 sleep 10
 aws lightsail open-instance-public-ports --instance-name ap-northeast-2-1 --port-info fromPort=0,protocol=TCP,toPort=65535 --region ap-northeast-2

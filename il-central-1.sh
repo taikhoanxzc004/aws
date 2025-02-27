@@ -1,3 +1,4 @@
+#!/bin/bash
 ﻿#il-central-1
 aws ec2 create-security-group --group-name Group --description "security group" --region il-central-1
 aws ec2 authorize-security-group-ingress --group-name Group --protocol tcp --port 22 --cidr 0.0.0.0/0 --region il-central-1
