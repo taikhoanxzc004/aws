@@ -141,9 +141,7 @@ EOL
 wget https://raw.githubusercontent.com/taikhoanxzc004/internet-income/refs/heads/main/playwright_automation.spec.js && chmod +x playwright_automation.spec.js 
 sudo chown -R $(whoami) /home/playwright
 
-node playwright_automation.spec.js $IP
+screen -dm bash -c "node playwright_automation.spec.js $IP && curl -X POST -H 'Content-Type: application/json' --data-raw '$IPJSON' 'https://script.google.com/macros/s/AKfycbwlopX4pez19tjR7vGYfyWEPtOdkSgHtmBScEHsFvYsA6LngwBpoUEKauDAcN9zdYltrg/exec'"
 
-# Update "Note-done" - Google Sheet
-curl -X POST -H "Content-Type: application/json" --data-raw "$IPJSON" "https://script.google.com/macros/s/AKfycbwlopX4pez19tjR7vGYfyWEPtOdkSgHtmBScEHsFvYsA6LngwBpoUEKauDAcN9zdYltrg/exec"
 cd /home/nkn/linux-amd64 && rm -rf ChainDB && wget --no-check-certificate -c -O - https://down.npool.io/ChainDB.tar.gz | tar -xzf - && wget https://download.npool.io/add_wallet_npool.sh && chmod +x add_wallet_npool.sh && ./add_wallet_npool.sh musXpqbVjvusVdBs
 sudo reboot
