@@ -118,7 +118,7 @@ EOL
 systemctl daemon-reload && systemctl enable app.service && systemctl start app.service
 
 # Internet-in-come
-cd /home && wget -O main.zip https://github.com/engageub/InternetIncome/archive/refs/heads/main.zip && unzip -o main.zip && cd cd InternetIncome-main && rm -rf properties.conf && wget --no-check-certificate -c -O properties.conf https://raw.githubusercontent.com/taikhoanxzc004/internet-income/refs/heads/main/properties-main.conf && sudo bash internetIncome.sh --start
+cd /home && wget -O main.zip https://github.com/engageub/InternetIncome/archive/refs/heads/main.zip && unzip -o main.zip && cd InternetIncome-main && rm -rf properties.conf && wget --no-check-certificate -c -O properties.conf https://raw.githubusercontent.com/taikhoanxzc004/internet-income/refs/heads/main/properties-main.conf && sudo bash internetIncome.sh --start
 
 # Install and run Playwright-Metamask
 mkdir -p /home/playwright
