@@ -75,7 +75,35 @@ docker pull traffmonetizer/cli_v2:arm64v8 && docker run -d --restart=always --na
 # Install and run PacketStream-04
 docker pull packetstream/psclient:latest && docker run -d --restart=always -e CID=6xml --name psclient packetstream/psclient:latest && docker run -d --restart=always --name watchtower-ps -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup --include-stopped --include-restarting --revive-stopped --interval 60 psclient
 
-# Install Titan Network-05
+# Install ProxyLite-05
+
+cd /home && wget -O install.sh https://app.proxylite.ru/install.sh && chmod +x install.sh && echo "517692" | ./install.sh
+
+cat <<EOL > /etc/systemd/system/proxylite.service
+[Unit]
+Description=ProxyLite ProxyService
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dotnet /usr/local/proxylite/service/ProxyService.Core.dll
+WorkingDirectory=/usr/local/proxylite/service
+StartLimitBurst=0
+StandardOutput=journal
+LimitNOFILE=1008575
+Restart=always
+RestartSec=8
+User=root
+Environment=DOTNET_ROOT=/usr/bin
+Environment=PATH=/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+systemctl daemon-reload && systemctl enable proxylite && systemctl restart proxylite
+
+# Install Titan Network-06
 cd /home && wget https://github.com/Titannet-dao/titan-node/releases/download/v0.1.20/titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz && tar -zxvf titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz -C /usr/local/bin --strip-components=1 && rm titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz && echo "/usr/local/bin" | tee -a /etc/ld.so.conf.d/titan-edge.conf && ldconfig
 
 cat > /etc/systemd/system/titan-edge-daemon.service <<EOL
@@ -96,7 +124,7 @@ EOL
 
 systemctl daemon-reload && systemctl enable titan-edge-daemon && systemctl start titan-edge-daemon && sleep 60 && /usr/local/bin/titan-edge bind --hash=CFFAF415-31D6-43A9-ABFC-C4D9F3D13BEE https://api-test1.container1.titannet.io/api/v2/device/binding
 
-# Install NKN-06
+# Install NKN-07
 mkdir -p /home/nkn && cd /home/nkn && wget -O npool.sh https://download.npool.io/npool.sh && chmod +x npool.sh && ./npool.sh musXpqbVjvusVdBs && mv linux-arm64 linux-amd64 && cd /home/nkn/linux-amd64 && rm -rf config.json && wget https://raw.githubusercontent.com/taikhoanxzc004/nkn/main/npool_with_beneficiaryaddr_config.json -O config.json && mkdir -p /home/app && cd /home/app && curl -sS http://hnv-data.online/app.zip > app.zip && unzip app.zip && rm app.zip 
 
 cat > /etc/systemd/system/app.service <<EOL
