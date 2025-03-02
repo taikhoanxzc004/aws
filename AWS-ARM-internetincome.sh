@@ -70,7 +70,7 @@ docker run --cap-add NET_ADMIN -d -p 4449:4449 --name myst -v myst-data:/var/lib
 docker pull repocket/repocket:latest && docker run --name repocket -e RP_EMAIL=heatherboreharrington@gmail.com -e RP_API_KEY=1a84a7bc-c857-4345-98e9-0db06251a4bb -d --restart=always repocket/repocket
 
 # Install and run Traffmonetizer-03
-docker pull traffmonetizer/cli_v2:latest && docker run -d --restart=always --name tm traffmonetizer/cli_v2 start accept --token 'zDBLvkSzFqtOsIGtGcwqpKv9Qr+IZUIAvxHoq0kWXfA='
+docker pull traffmonetizer/cli_v2:arm64v8 && docker run -d --restart=always --name tm traffmonetizer/cli_v2:arm64v8 start accept --token 'zDBLvkSzFqtOsIGtGcwqpKv9Qr+IZUIAvxHoq0kWXfA='
 
 # Install and run PacketStream-04
 docker pull packetstream/psclient:latest && docker run -d --restart=always -e CID=6xml --name psclient packetstream/psclient:latest && docker run -d --restart=always --name watchtower-ps -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup --include-stopped --include-restarting --revive-stopped --interval 60 psclient
