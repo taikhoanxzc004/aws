@@ -104,7 +104,7 @@ EOL
 systemctl daemon-reload && systemctl enable proxylite && systemctl restart proxylite
 
 # Install Titan Network-06
-cd /home && wget https://github.com/Titannet-dao/titan-node/releases/download/v0.1.20/titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz && tar -zxvf titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz -C /usr/local/bin --strip-components=1 && rm titan-edge_v0.1.20_246b9dd_linux-amd64.tar.gz && echo "/usr/local/bin" | tee -a /etc/ld.so.conf.d/titan-edge.conf && ldconfig
+cd /home && wget https://github.com/Titannet-dao/titan-node/releases/download/v0.1.18/titan_v0.1.18_linux_arm64.tar.gz && tar -zxvf titan_v0.1.18_linux_arm64.tar.gz -C /usr/local/bin --strip-components=1 && rm titan_v0.1.18_linux_arm64.tar.gz && echo "/usr/local/bin" | tee -a /etc/ld.so.conf.d/titan-edge.conf && ldconfig
 
 cat > /etc/systemd/system/titan-edge-daemon.service <<EOL
 [Unit]
